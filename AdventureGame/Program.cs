@@ -69,7 +69,12 @@ namespace AdventureGame
             Console.Write("?\n");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            String PCName = Console.ReadLine(); //Character's Name to be used in creating a CharacterSheet class
+            String PCName = GetUserInput(); //Character's Name to be used in creating a CharacterSheet class
+            if (String.IsNullOrEmpty(PCName))
+            {
+                Console.WriteLine("\nPlease enter your name\n\n");
+                CharCreation();
+            }
             Console.ResetColor();
             Console.Write("I see, so your name is ");
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -77,7 +82,7 @@ namespace AdventureGame
             Console.ResetColor();
             Console.Write("?(y/n)\n");
             string Confirmation = Console.ReadLine().ToLower();
-            if (Confirmation == "y")
+            if (Confirmation == "y" || Confirmation == "yes")
             {
                 PCRace = CharCreationRace(PCName);
                 PCClass = CharCreationClass();
@@ -86,7 +91,6 @@ namespace AdventureGame
                 PCStr = 0;
                 PCAgi = 0;
                 PCIntel = 0;
-                /* public CharacterSheet(string name, string race, string pcClass, string lb, int strength, int agi, int intel, int maxHP, int maxMP, int level, int curHP, int curMP)*/
                 switch (PCRace)
                 {
                     case "Human":
@@ -194,14 +198,14 @@ namespace AdventureGame
             Console.WriteLine("To select enter the number of the desired option");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Blue;
-            chosenRace = Console.ReadLine();
+            chosenRace = GetUserInput();
             Console.ResetColor();
             switch (chosenRace)
             {
                 case "1":
                     Console.WriteLine("Are you sure that's how you arrived here?");
                     string Confirmation = Console.ReadLine().ToLower();
-                    if (Confirmation == "y")
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenRace = "Human";
                     } else
@@ -212,8 +216,8 @@ namespace AdventureGame
                     break;
                 case "2":
                     Console.WriteLine("Are you sure that's how you arrived here?");
-                    Confirmation = Console.ReadLine();
-                    if (Confirmation == "y")
+                    Confirmation = Console.ReadLine().ToLower();
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenRace = "Angel";
                     }
@@ -225,8 +229,8 @@ namespace AdventureGame
                     break;
                 case "3":
                     Console.WriteLine("Are you sure that's how you arrived here?");
-                    Confirmation = Console.ReadLine();
-                    if (Confirmation == "y")
+                    Confirmation = Console.ReadLine().ToLower();
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenRace = "Demon";
                     }
@@ -261,7 +265,7 @@ namespace AdventureGame
             Console.WriteLine("To select enter the number of the desired weapon");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Blue;
-            chosenClass = Console.ReadLine();
+            chosenClass = GetUserInput();
             Console.ResetColor();
             string Confirmation = "";
             switch (chosenClass)
@@ -269,8 +273,8 @@ namespace AdventureGame
                 case "1":
                     Console.WriteLine("You see a masterfully made bow from wood and a quiver with 20 iron arrows next to it");
                     Console.WriteLine("Are you sure you want to be an Archer?(y/n)");
-                    Confirmation = Console.ReadLine();
-                    if (Confirmation == "y")
+                    Confirmation = Console.ReadLine().ToLower();
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Archer";
                     } else
@@ -281,8 +285,8 @@ namespace AdventureGame
                 case "2":
                     Console.WriteLine("You see a shining katana used by the samurais is ancient Japan");
                     Console.WriteLine("Are you sure you want to be a Samurai?(y/n)");
-                    Confirmation = Console.ReadLine();
-                    if (Confirmation == "y")
+                    Confirmation = Console.ReadLine().ToLower();
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Samurai";
                     }
@@ -294,8 +298,8 @@ namespace AdventureGame
                 case "3":
                     Console.WriteLine("You see long silver sword with a beautiful handle");
                     Console.WriteLine("Are you sure you want to become a Paladin?(y/n)");
-                    Confirmation = Console.ReadLine();
-                    if (Confirmation == "y")
+                    Confirmation = Console.ReadLine().ToLower();
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Paladin";
                     }
@@ -307,8 +311,8 @@ namespace AdventureGame
                 case "4":
                     Console.WriteLine("You see two daggers, short but long enough to perform a stealthy assassination");
                     Console.WriteLine("Are you sure you want to become an Assassin?(y/n)");
-                    Confirmation = Console.ReadLine();
-                    if (Confirmation == "y")
+                    Confirmation = Console.ReadLine().ToLower();
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Assassin";
                     }
@@ -320,8 +324,8 @@ namespace AdventureGame
                 case "5":
                     Console.WriteLine("You see huge tome which emanates a deadly energy after a bit it starts emanating a warm friendly like energy");
                     Console.WriteLine("Are you sure you want to become a Magician?(y/n)");
-                    Confirmation = Console.ReadLine();
-                    if (Confirmation == "y")
+                    Confirmation = Console.ReadLine().ToLower();
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Magician";
                     }
@@ -333,8 +337,8 @@ namespace AdventureGame
                 default:
                     Console.WriteLine("You don't want any of the weapons? That's weird");
                     Console.WriteLine("Are you sure you want to become a Monk?(y/n)");
-                    Confirmation = Console.ReadLine();
-                    if (Confirmation == "y")
+                    Confirmation = Console.ReadLine().ToLower();
+                    if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Monk";
                     }
@@ -345,6 +349,30 @@ namespace AdventureGame
                     break;
             }
             return chosenClass;
+        }
+        public static bool IsOnlyLettersOrDigits(string s)
+        {
+            bool isValid = true;
+
+            foreach( char c in s)
+            {
+                if (!Char.IsLetterOrDigit(c) || c == ' ')
+                    isValid = false;
+            }
+            return isValid;
+        }
+
+        public static string GetUserInput()
+        {
+            string tempUserInput = Console.ReadLine();
+            if (IsOnlyLettersOrDigits(tempUserInput))
+            {
+                return tempUserInput;
+            } else
+            {
+                return "";
+            }
+            
         }
     }
 }
