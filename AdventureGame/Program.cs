@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
+﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.ComponentModel.Design;
 using System.Reflection.Emit;
@@ -17,9 +18,11 @@ namespace AdventureGame
             Console.ForegroundColor = ConsoleColor.Blue;
             string showStats = playableCharacter.showDetails();
             Console.WriteLine(showStats);
-            Console.Read();
+            Console.Clear();
+            introduction(playableCharacter);
+            MoniaTown();
+            Console.ResetColor();
 
-            //drawUI(Cloud.MaxHP, Cloud.CurHP, Cloud.MaxMP, Cloud.CurMP, Cloud.Lb, Cloud.Name);
         }
 
         static void drawUI (int maxHP,int curHP,int maxMP,int curMP,string LB,string name)
@@ -34,7 +37,7 @@ namespace AdventureGame
                 + maxHP.ToString()
                 + "   |");
 
-            Console.WriteLine("MP "
+            Console.WriteLine("MP " 
                 + curMP.ToString()
                 + "/"
                 + maxMP.ToString()
@@ -62,6 +65,7 @@ namespace AdventureGame
             Console.Write("Georgios Drakos\n\n");
             Console.ResetColor();
 
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("Hey, you are finally awake. Do you remember your");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write(" name ");
@@ -76,11 +80,13 @@ namespace AdventureGame
                 CharCreation();
             }
             Console.ResetColor();
-            Console.Write("I see, so your name is ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("I see, so you are THE ");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write(PCName);
             Console.ResetColor();
             Console.Write("?(y/n)\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
             string Confirmation = Console.ReadLine().ToLower();
             if (Confirmation == "y" || Confirmation == "yes")
             {
@@ -179,6 +185,7 @@ namespace AdventureGame
         static string CharCreationRace(string PCName)
         {
             string chosenRace= "";
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("We don't always have visitors in this place, do you remember how you got here ");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write(PCName);
@@ -199,23 +206,26 @@ namespace AdventureGame
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Blue;
             chosenRace = GetUserInput();
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
             switch (chosenRace)
             {
                 case "1":
                     Console.WriteLine("Are you sure that's how you arrived here?");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     string Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenRace = "Human";
                     } else
                     {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine("Yeah, I didn't think so, you are in the middle of a freaking road");
                         CharCreationRace(PCName);
                     }
                     break;
                 case "2":
                     Console.WriteLine("Are you sure that's how you arrived here?");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
@@ -223,12 +233,14 @@ namespace AdventureGame
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine("Yeah, that would be pretty ridiculous");
                         CharCreationRace(PCName);
                     }
                     break;
                 case "3":
                     Console.WriteLine("Are you sure that's how you arrived here?");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
@@ -236,12 +248,14 @@ namespace AdventureGame
                     }
                     else
                     {
-                        Console.WriteLine("Huh? where do you live??");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine("Huh?");
                         CharCreationRace(PCName);
                     }
                     break;
                 default:
-                    Console.WriteLine("Please enter one of the above values we don't have time to waste, they are coming!!!");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Please enter one of the above values");
                     CharCreationRace(PCName);
                     break;
             }
@@ -250,15 +264,17 @@ namespace AdventureGame
         static string CharCreationClass()
         {
             string chosenClass = "";
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Ok, we are almost ready I just want you to answer a last thing for me");
             Console.WriteLine("Have a look at these weapons and choose the one that suits you and please, be fast");
+            Console.ResetColor();
             Console.WriteLine("---------------------------------------------------------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("1: Bow                                                                                          |");
-            Console.WriteLine("2: Katana                                                                                       |");
-            Console.WriteLine("3: Sword                                                                                        |");
-            Console.WriteLine("4: Dagger                                                                                       |");
-            Console.WriteLine("5: Book                                                                                         |");
+            Console.WriteLine("1: Bow                                                                                        |");
+            Console.WriteLine("2: Katana                                                                                     |");
+            Console.WriteLine("3: Sword                                                                                      |");
+            Console.WriteLine("4: Dagger                                                                                     |");
+            Console.WriteLine("5: Book                                                                                       |");
             Console.ResetColor();
             Console.WriteLine("---------------------------------------------------------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Green;
@@ -268,11 +284,13 @@ namespace AdventureGame
             chosenClass = GetUserInput();
             Console.ResetColor();
             string Confirmation = "";
+            Console.ForegroundColor = ConsoleColor.Green;
             switch (chosenClass)
             {
                 case "1":
                     Console.WriteLine("You see a masterfully made bow from wood and a quiver with 20 iron arrows next to it");
                     Console.WriteLine("Are you sure you want to be an Archer?(y/n)");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
@@ -283,8 +301,9 @@ namespace AdventureGame
                     }
                     break;
                 case "2":
-                    Console.WriteLine("You see a shining katana used by the samurais is ancient Japan");
+                    Console.WriteLine("You see a shining katana used by the samurai in ancient Japan");
                     Console.WriteLine("Are you sure you want to be a Samurai?(y/n)");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
@@ -298,6 +317,7 @@ namespace AdventureGame
                 case "3":
                     Console.WriteLine("You see long silver sword with a beautiful handle");
                     Console.WriteLine("Are you sure you want to become a Paladin?(y/n)");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
@@ -311,6 +331,7 @@ namespace AdventureGame
                 case "4":
                     Console.WriteLine("You see two daggers, short but long enough to perform a stealthy assassination");
                     Console.WriteLine("Are you sure you want to become an Assassin?(y/n)");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
@@ -324,6 +345,7 @@ namespace AdventureGame
                 case "5":
                     Console.WriteLine("You see huge tome which emanates a deadly energy after a bit it starts emanating a warm friendly like energy");
                     Console.WriteLine("Are you sure you want to become a Magician?(y/n)");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
@@ -337,6 +359,7 @@ namespace AdventureGame
                 default:
                     Console.WriteLine("You don't want any of the weapons? That's weird");
                     Console.WriteLine("Are you sure you want to become a Monk?(y/n)");
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
@@ -349,6 +372,179 @@ namespace AdventureGame
                     break;
             }
             return chosenClass;
+        }
+
+        static void introduction(CharacterSheet player)
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("Introduction are in order but I fear we are in imminent danger ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write(player.Name);
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\nLOOK BEHIND YOU!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nLook behind?");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string tempUserInput = GetUserInput();
+            if (tempUserInput == "yes" || tempUserInput == "y")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You turn back and see an enormous figure chasing after you");
+                Console.Read();
+                Console.WriteLine("The only thing you can make out is that it has big glowing red eyes");
+                Console.Read();
+                Console.WriteLine("Suddenly you see a white light closing in on the left side of the giant figure");
+                Console.Read();
+                Console.WriteLine("A very loud BANG penetrates your ears and makes you slightly dizzy");
+                Console.Read();
+
+                if (player.Agility >= 3)
+                {
+                    Console.WriteLine("However, your reflexes are enough to make you keep your balance and not fall over");
+                } else
+                {
+                    Console.WriteLine("You stumble and start rolling away from the gigantic figure");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("-2 HP");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("The lady that is with you casts a spell so swiftly that she manages to break your fall");
+                    Console.WriteLine("and you start hovering for slightly enough time to regain control over your body");
+                    Console.Read();
+                    Console.WriteLine("After a short time you manage to make your way in a town");
+                }
+            } else if (tempUserInput == "no" || tempUserInput == "n")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You are frightened enough by the sounds that are coming from whatever is behind you");
+                Console.WriteLine("and decide not to look just in case you trip over and fall.");
+                Console.Read();
+                Console.WriteLine("While you are running you hear a loud bang, you thank God for not looking back since that bang would have probably made you lose control of your body");
+                Console.Read();
+                Console.WriteLine("After a short time you manage to make your way in a town");
+
+            } else
+            {
+                Console.WriteLine("Please select one of the options");
+                introduction(player);
+            }
+
+        }
+        static void MoniaTown()
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("You must have a lot of questions, let me explain");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("What are you going to do?");
+            Console.ResetColor();
+            Console.WriteLine("--------------------------------");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("1: Who are you?                   |");
+            Console.WriteLine("2: Where are you from?            |");
+            Console.WriteLine("3: How did you find me?           |");
+            Console.WriteLine("4: ...                            |");
+            Console.ResetColor();
+            Console.WriteLine("----------------------------------");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string tempUserInput = GetUserInput();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            switch (tempUserInput)
+            {
+                case "1":
+                    Console.WriteLine("My name is Kirki, I am a priest of the holy temple here in the town of Moria");
+                    Console.WriteLine("I server under Nahzu and have devoted my life to Nahzu as his humble servant");
+                    MoniaTown();
+                    break;
+                case "2":
+                    MoniaTownExtendedDialogue();
+                    break;
+                case "3":
+                    Console.WriteLine("I was gathering fruit for the village and I stumbled on you having passed out in the middle of the forest");
+                    Console.WriteLine("You must be starving, I suggest we go to the tavern first and make you something to eat");
+                    //TODO MOVE TO NEXT SCREEN
+                    Console.Read();
+                    break;
+                case "4":
+                    MoniaTownLonerDialogue();
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Please select one of the above options");
+                    MoniaTown();
+                    break;
+            }
+            Console.ForegroundColor = ConsoleColor.Magenta;
+
+
+
+        }
+        static void MoniaTownExtendedDialogue()
+        {
+            Console.WriteLine("Born and raised here, in the beautiful town of Monia,");
+            Console.WriteLine("hard to believe that a little town like this is still on the map with what's been happening to the rest of the world");
+            Console.ResetColor();
+            Console.WriteLine("-------------------------------");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("1: I want to ask more questions|");
+            Console.WriteLine("2: What has been happening?    |");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("-------------------------------");
+            string MoniaQuestion = GetUserInput();
+            switch (MoniaQuestion)
+            {
+                case "1":
+                    MoniaTown();
+                    break;
+                case "2":
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("This is going to take a while, I think it's better if we went to make you something to eat, you must be starving");
+                    //TODO MOVE TO NEXT SCREEN
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Please enter one of the possible options");
+                    break;
+
+            }
+        }
+        static void MoniaTownLonerDialogue()
+        {
+            Console.WriteLine("Not the talkative type I see..., well you must be starving, want any of the fruit I have gathered?");
+            Console.ResetColor();
+            Console.WriteLine("----------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("1: Yes                                             |");
+            Console.WriteLine("2: No                                              |");
+            Console.WriteLine("3: Sorry I'm not feeling well, excuse my rudeness  |");
+            Console.ResetColor();
+            Console.WriteLine("---------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string LeaveMeAloneOption = GetUserInput();
+            switch (LeaveMeAloneOption)
+            {
+                case "1":
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("Here you go, there are more from where that came from as well");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("You have received a handful of strawberries");
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("You must be tired I suggest we go to the local Inn to get you a room");
+                    //TODO MOVE TO NEXT SCREEN
+                    break;
+                case "2":
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("Oh Lord, I'm sorry in this case I will leave you alone, however if you need to find me for any reason");
+                    Console.WriteLine("I will be inside the town's temple, I spend most of my time praying for the wellbeing of my fellow villagers");
+                    break;
+                case "3":
+                    MoniaTown();
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Please enter one of the above choices");
+                    break;
+            }
         }
         public static bool IsOnlyLettersOrDigits(string s)
         {
@@ -364,7 +560,7 @@ namespace AdventureGame
 
         public static string GetUserInput()
         {
-            string tempUserInput = Console.ReadLine();
+            string tempUserInput = Console.ReadLine().ToLower();
             if (IsOnlyLettersOrDigits(tempUserInput))
             {
                 return tempUserInput;
