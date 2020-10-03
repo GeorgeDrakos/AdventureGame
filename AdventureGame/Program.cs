@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.ComponentModel.Design;
+using System.Data;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
@@ -10,43 +11,45 @@ namespace AdventureGame
 {
     class Program
     {
-        public static CharacterSheet playableCharacter;
 
+        public static CharacterSheet playableCharacter;
         static void Main(string[] args)
         {
             playableCharacter = CharCreation();
             Console.ForegroundColor = ConsoleColor.Blue;
             string showStats = playableCharacter.showDetails();
             Console.WriteLine(showStats);
-            Console.Clear();
+            Console.ReadKey();
+            ClearConsole();
             introduction(playableCharacter);
             MoniaTown();
             Console.ResetColor();
 
         }
 
-        static void drawUI (int maxHP,int curHP,int maxMP,int curMP,string LB,string name)
+        static void drawUI (CharacterSheet player)
         {
             Console.WriteLine("----------");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.WriteLine("HP "
-                + curHP.ToString()
+                + player.CurHP.ToString()
                 + "/"
-                + maxHP.ToString()
-                + "   |");
+                + player.MaxHP.ToString());
 
-            Console.WriteLine("MP " 
-                + curMP.ToString()
+            Console.WriteLine("MP "
+                + player.CurMP.ToString()
                 + "/"
-                + maxMP.ToString()
-                + "    |");
+                + player.MaxMP.ToString());
 
             Console.ForegroundColor = ConsoleColor.Red;
 
-            Console.WriteLine("LB =" + LB + " |");
-            Console.WriteLine(name + "     |");
+            Console.WriteLine("LB =" + player.Lb);
+            Console.WriteLine("Level = " + player.Level);
+            Console.WriteLine(player.Name);
+            Console.WriteLine(player.CurExp + "" + "/"+ player.ReqExp);
+
             Console.ResetColor();
             Console.WriteLine("----------");
         }
@@ -173,7 +176,7 @@ namespace AdventureGame
                         break;
                 }
                 string lb = "------";
-                playableCharacter = new CharacterSheet(PCName, PCRace, PCClass, lb, PCStr, PCAgi, PCIntel, maxHP, maxMP, maxHP, maxHP, maxMP);
+                playableCharacter = new CharacterSheet(PCName, PCRace, PCClass, lb, PCStr, PCAgi, PCIntel, maxHP, maxMP, maxHP, maxMP);
             } else
             {
                 CharCreation();
@@ -569,6 +572,12 @@ namespace AdventureGame
                 return "";
             }
             
+        }
+
+        public static void ClearConsole()
+        {
+            Console.Clear();
+            drawUI(playableCharacter);
         }
     }
 }
