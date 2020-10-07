@@ -15,7 +15,7 @@ namespace AdventureGame
         public static CharacterSheet playableCharacter;
         static void Main(string[] args)
         {
-            playableCharacter = CharCreation();
+            /*playableCharacter = CharCreation();
             Console.ForegroundColor = ConsoleColor.Blue;
             string showStats = playableCharacter.showDetails();
             Console.WriteLine(showStats);
@@ -23,10 +23,11 @@ namespace AdventureGame
             ClearConsole();
             introduction(playableCharacter);
             MoniaTown();
-            Console.ResetColor();
+            Console.ResetColor();*/
+            MoniaTownHub();
+            Console.ReadKey();
 
         }
-
         static void drawUI (CharacterSheet player)
         {
             Console.WriteLine("----------");
@@ -547,6 +548,61 @@ namespace AdventureGame
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Please enter one of the above choices");
                     break;
+            }
+        }
+
+        static void MoniaTownHub()
+        {
+            Console.WriteLine("=============================|");
+            Console.WriteLine("====WELCOME TO MONIA TOWN====|");
+            Console.WriteLine("=============================|\n\n\n");
+
+            Console.Write("==");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("1)Blacksmith");
+            Console.ResetColor();
+            Console.Write("====");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("2)Inn");
+            Console.ResetColor();
+            Console.Write("======|\n");
+            Console.Write("|===");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("3)Store");
+            Console.ResetColor();
+            Console.Write("===");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("4)Church");
+            Console.ResetColor();
+            Console.Write("=======|\n");
+            Console.Write("|================");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("0)Leave town");
+            Console.ResetColor();
+            Console.Write("|\n");
+            string UserTemp = GetUserInput();
+            switch(UserTemp)
+            {
+                case "1":
+
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "0":
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Having nothing you want to do in the town you decide to move on to explore the rest of the world!");
+                    Console.ResetColor();
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Please select one of the above options");
+                    Console.ResetColor();
+                    break;
+
             }
         }
         public static bool IsOnlyLettersOrDigits(string s)
