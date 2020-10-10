@@ -5,9 +5,10 @@ using System.Text;
 
 namespace AdventureGame
 {
+
     public class CharacterSheet
     {
-        public CharacterSheet(string name, string race, string pcClass, string lb, int strength, int agility, int intelligence, int maxHP, int maxMP, int curHP, int curMP)
+        public CharacterSheet(string name, string race, string pcClass, string lb, int strength, int agility, int intelligence, int maxHP, int maxMP, int curHP, int curMP, List<Skill> charSkills)
         {
             Name = name;
             Race = race;
@@ -23,7 +24,7 @@ namespace AdventureGame
             Intelligence = intelligence;
             Agility = agility;
             Strength = strength;
-
+            CharSkill = charSkills;
         }
 
         public string Name { get; set; }
@@ -41,10 +42,15 @@ namespace AdventureGame
         public int Agility { get; set; }
         public int Strength { get; set; }
 
+        public List<Skill> CharSkill { get; set; }
+
         public string showDetails()
         {
             string detailsString = "Name: " + Name + "\nRace: " + Race + "\nClass: " + PcClass + "\nLevel: " + Level + "\nEXP: " + CurExp + "/" + ReqExp + "\nLB: " + Lb + "\nStrength: " + Strength + "\nAgility: " + Agility + "\nIntelligence: " + Intelligence
             + "\nHP: " + MaxHP + "\nMP: " + MaxMP;
+            foreach (Skill s in CharSkill){
+                detailsString += "\n" + s.Name + ", " + s.Details + "Scales with: " + s.StatScale;
+            }
             return detailsString;
         }
 

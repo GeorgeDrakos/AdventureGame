@@ -15,7 +15,7 @@ namespace AdventureGame
         public static CharacterSheet playableCharacter;
         static void Main(string[] args)
         {
-            /*playableCharacter = CharCreation();
+            playableCharacter = CharCreation();
             Console.ForegroundColor = ConsoleColor.Blue;
             string showStats = playableCharacter.showDetails();
             Console.WriteLine(showStats);
@@ -23,7 +23,7 @@ namespace AdventureGame
             ClearConsole();
             introduction(playableCharacter);
             MoniaTown();
-            Console.ResetColor();*/
+            Console.ResetColor();
             MoniaTownHub();
             Console.ReadKey();
 
@@ -267,6 +267,7 @@ namespace AdventureGame
         }
         static string CharCreationClass()
         {
+            //TODO MAKE CLASSLESS CHARACTER CREATION    
             string chosenClass = "";
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Ok, we are almost ready I just want you to answer a last thing for me");
@@ -299,6 +300,8 @@ namespace AdventureGame
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Archer";
+                        Skill SplitArrow = new Skill("SplitArrow", "Launch an arrow from your bow which splits on impact injuring a foe multiple times", "Agility");
+                        playableCharacter.CharSkills.Add(SplitArrow);
                     } else
                     {
                         CharCreationClass();
@@ -312,6 +315,9 @@ namespace AdventureGame
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Samurai";
+                        Skill Tsujigiri = new Skill("Tsujigiri", "You test the effictiveness of your weapon by attacking the first opponent in front of you", "Strength");
+                        playableCharacter.CharSkills.Add(Tsujigiri);
+
                     }
                     else
                     {
@@ -326,6 +332,9 @@ namespace AdventureGame
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Paladin";
+                        Skill HolyStrike = new Skill("Holy Strike", "You enchant your hammer with holy power after striking your enemy", "Strength");
+                        playableCharacter.CharSkills.Add(HolyStrike);
+
                     }
                     else
                     {
@@ -340,6 +349,9 @@ namespace AdventureGame
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Assassin";
+                        Skill SilentBlade = new Skill("Silent Blade", "You stab your enemy on the first spot you find available with incredible swiftness", "Agility");
+                        playableCharacter.CharSkills.Add(SilentBlade);
+
                     }
                     else
                     {
@@ -354,6 +366,9 @@ namespace AdventureGame
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
                         chosenClass = "Magician";
+                        Skill LightningOrb = new Skill("Lightning Orb", "You strike your opponent with a swift bolt of lightning", "Intelligent");
+                        playableCharacter.CharSkills.Add(LightningOrb);
+
                     }
                     else
                     {
@@ -362,12 +377,15 @@ namespace AdventureGame
                     break;
                 default:
                     Console.WriteLine("You don't want any of the weapons? That's weird");
-                    Console.WriteLine("Are you sure you want to become a Monk?(y/n)");
+                    Console.WriteLine("Are you sure you want to become a Summoner?(y/n)");
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Confirmation = Console.ReadLine().ToLower();
                     if (Confirmation == "y" || Confirmation == "yes")
                     {
-                        chosenClass = "Monk";
+                        chosenClass = "Summoner";
+                        Skill SummonImp = new Skill("Summon Imp", "You summon an imp to hit your enemy with a flame bolt", "Intelligence");
+                        playableCharacter.CharSkill.Add(SummonImp);
+
                     }
                     else
                     {
@@ -503,7 +521,7 @@ namespace AdventureGame
                 case "2":
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine("This is going to take a while, I think it's better if we went to make you something to eat, you must be starving");
-                    //TODO MOVE TO NEXT SCREEN
+                    MoniaTownHub();
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -534,7 +552,7 @@ namespace AdventureGame
                     Console.WriteLine("You have received a handful of strawberries");
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine("You must be tired I suggest we go to the local Inn to get you a room");
-                    //TODO MOVE TO NEXT SCREEN
+                    MoniaTownHub();
                     break;
                 case "2":
                     Console.ForegroundColor = ConsoleColor.Magenta;
